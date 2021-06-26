@@ -1,0 +1,4 @@
+32,4
+KMP:-1,20,4
+quick_search:-1,38,6
+Karp_Rabin:-1,36,3

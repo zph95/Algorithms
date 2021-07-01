@@ -27,6 +27,9 @@
     <ClCompile Include="RandUtils.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="BigIntCalculate.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Calculate.h">
@@ -36,6 +39,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="RandUtils.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BigIntCalculate.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

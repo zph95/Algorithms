@@ -4,6 +4,7 @@
 #include <iostream>
 #include "RandUtils.h"
 #include "Sorting.h"
+#include"BigIntCalculate.h"
 
 using namespace std;
 int main()
@@ -16,7 +17,9 @@ int main()
     RandUtils::print(nums, lentgh);
    cout << RandUtils::isSorted(nums, lentgh) << endl;
    cout << "Hello World!\n";
-  
+   string s1 = "789546321", s2 = "15462897444";
+   cout << BigIntCalculate::subtract(s1, s2) << endl;
+   return 0;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单

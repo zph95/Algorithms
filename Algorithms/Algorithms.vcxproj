@@ -140,11 +140,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Algorithms.cpp" />
+    <ClCompile Include="BigIntCalculate.cpp" />
     <ClCompile Include="Calculate.cpp" />
     <ClCompile Include="RandUtils.cpp" />
     <ClCompile Include="Sorting.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BigIntCalculate.h" />
     <ClInclude Include="Calculate.h" />
     <ClInclude Include="RandUtils.h" />
     <ClInclude Include="Sorting.h" />

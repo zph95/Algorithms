@@ -175,9 +175,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Object Include="..\Algorithms\Debug\Calculate.obj" />
-    <Object Include="..\Algorithms\Debug\RandUtils.obj" />
-    <Object Include="..\Algorithms\Debug\Sorting.obj" />
+    <Object Include="..\Algorithms\x64\Debug\Calculate.obj" />
+    <Object Include="..\Algorithms\x64\Debug\RandUtils.obj" />
+    <Object Include="..\Algorithms\x64\Debug\Sorting.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

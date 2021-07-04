@@ -92,6 +92,10 @@ string BigIntCalculate::divide(string num1, string num2)
 	if (m < n) {
 		return "0";
 	}
+	if (num2 == "0") {
+		return "error";
+	}
+
 	int t = m - n;//Î»ÊýÖ®²î
 	string div_result(t+1, '0');
 	string tmp_num2(n + t, '0');

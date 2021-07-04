@@ -1,5 +1,5 @@
 #include "BigIntCalculate.h"
-
+#include<iostream>
 string BigIntCalculate::add(string num1, string num2)
 {
     string str;
@@ -28,56 +28,47 @@ string BigIntCalculate::subtract(string num1, string num2)
 	}
 	if (num1.size() == num2.size())
 	{
-		int i = 0;
-		while (i < num1.size() && num1[i] == num2[i]) {
-			i++;
-			if (num1[i] < num2[i])
-			{
+		for (int i = 0; i < num1.size(); i++) {
+			int a = num1[i] + '0';
+			int b = num2[i] + '0';
+			if (a < b) {
 				return "-" + subtract(num2, num1);
+			}
+			else if (a > b) {
+				break;
 			}
 		}
 	}
-	string res(num1.size(), '0');
+	string str;
 	int i = num1.size() - 1, j = num2.size() - 1;
-	int k = i;
-	int borrow = 0;
-	while (i >= 0 && j >= 0)
+	int cur = 0;
+	while (i >= 0 )
 	{
-		int sum = (num1[i] - '0') - borrow - (num2[j] - '0');
-		//cout<<sum<<endl;
-		if (sum < 0)
-		{
-			borrow = 1;
-			sum += 10;
-			res[k] = sum + '0';
+		if (j >= 0) {
+			cur += (num1[i] - '0') - (num2[j] - '0');
 		}
 		else {
-			borrow = 0;
-			res[k] = sum + '0';
+			cur += num1[i] - '0';
 		}
 		i--;
 		j--;
-		k--;
-	}
-	while (i >= 0)
-	{
-		int sum = num1[i--] - '0' - borrow;
-		if (sum < 0)
+
+		if (cur < 0)
 		{
-			borrow = 1;
-			sum += 10;
-			res[k--] = sum + '0';
+			str += to_string(cur+10);
+			cur = -1;
 		}
 		else {
-			borrow = 0;
-			res[k--] = sum + '0';
+			str += to_string(cur);
+			cur = 0;
 		}
 	}
-	for (int index = 0; index < res.size(); index++)
-		if (res[index] != '0') return res.substr(index); //去除前导0
+	reverse(str.begin(), str.end());
+	for (int i = 0; i < str.size(); i++)
+		if (str[i] != '0') return str.substr(i); //去除前导0
 	return "0";
 }
-
+//大整数乘法的快速算法还可以用（快速傅立叶变换FFT）
 string BigIntCalculate::multiply(string num1, string num2)
 {
     int m = num1.size(), n = num2.size();
@@ -96,10 +87,74 @@ string BigIntCalculate::multiply(string num1, string num2)
 
 string BigIntCalculate::divide(string num1, string num2)
 {
-	return string();
+	int m = num1.size(), n = num2.size();
+
+	if (m < n) {
+		return "0";
+	}
+	int t = m - n;//位数之差
+	string div_result(t+1, '0');
+	string tmp_num2(n + t, '0');
+	for (int i = 0; i < n; i++) {//将除数扩大10^t倍
+		tmp_num2[i] = num2[i];
+	}
+	string mod_result = num1;
+	for (int i = 0; i < t + 1; i++) {
+		int count = 0;
+		string sub_result = mod_result;
+		while(true){
+			string tmp = tmp_num2.substr(0, n + t - i);
+			//cout << "i = " << i << " tmp = " << tmp << " sub_result = " << sub_result << endl;
+			sub_result = subtract(sub_result, tmp);
+			if ( sub_result[0] != '-') {
+				count++;
+				mod_result = sub_result;
+			}
+			else  {
+				break;
+			}
+		}
+		div_result[i] = '0' + count;
+	}
+	if (div_result[0] == '0') {
+		return div_result.substr(1); //去除前导0
+	}
+	else {
+		return div_result;
+	}
 }
 
 string BigIntCalculate::mod(string num1, string num2)
 {
-	return string();
+
+	int m = num1.size(), n = num2.size();
+
+	if (m < n) {
+		return num1;
+	}
+	int t = m - n;//位数之差
+	string div_result(t + 1, '0');
+	string tmp_num2(n + t, '0');
+	for (int i = 0; i < n; i++) {//将除数扩大10^t倍
+		tmp_num2[i] = num2[i];
+	}
+	string mod_result = num1;
+	for (int i = 0; i < t + 1; i++) {
+		int count = 0;
+		string sub_result = mod_result;
+		while (true) {
+			string tmp = tmp_num2.substr(0, n + t - i);
+			//cout << "i = " << i << " tmp = " << tmp << " sub_result = " << sub_result << endl;
+			sub_result = subtract(sub_result, tmp);
+			if (sub_result[0] != '-') {
+				count++;
+				mod_result = sub_result;
+			}
+			else {
+				break;
+			}
+		}
+		div_result[i] = '0' + count;
+	}
+	return mod_result;
 }

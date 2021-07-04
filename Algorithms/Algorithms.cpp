@@ -19,6 +19,11 @@ int main()
    cout << "Hello World!\n";
    string s1 = "789546321", s2 = "15462897444";
    cout << BigIntCalculate::subtract(s1, s2) << endl;
+   s2 = "24680";
+   s1 = "37";
+   cout << BigIntCalculate::subtract(s1, s2) << endl;
+   cout << BigIntCalculate::divide(s1, s2) << endl;
+   cout << BigIntCalculate::mod(s1, s2) << endl;
    return 0;
 }
 

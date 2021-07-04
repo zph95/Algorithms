@@ -24,6 +24,9 @@
     <ClCompile Include="SortTest.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="BigIntTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -38,6 +41,9 @@
       <Filter>资源文件</Filter>
     </Object>
     <Object Include="..\Algorithms\x64\Debug\Sorting.obj">
+      <Filter>资源文件</Filter>
+    </Object>
+    <Object Include="..\Algorithms\x64\Debug\BigIntCalculate.obj">
       <Filter>资源文件</Filter>
     </Object>
   </ItemGroup>

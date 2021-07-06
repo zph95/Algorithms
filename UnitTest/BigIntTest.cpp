@@ -4,9 +4,9 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace UnitTest
+namespace BigIntTest
 {
-	TEST_CLASS(UnitTest)
+	TEST_CLASS(BigIntTest)
 	{
 	public:
 

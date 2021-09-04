@@ -1,7 +1,8 @@
 #include "Sorting.h"
 #include "iostream"
 #include "RandUtils.h"
-
+#include <thread>
+#include<vector>
 using namespace std;
 
 //快速排序
@@ -22,6 +23,40 @@ void Sorting::quick_sort(int nums[], int low, int high) {
 
 	}
 }
+
+
+void Sorting::parallelQuickSort(int nums[], int length, int threadNum)
+{
+	parallel_quick_sort(nums, 0, length - 1, 0, threadNum);
+}
+
+void Sorting::parallel_quick_sort(int* nums, int low, int high, int threadDeepth, int maxNum) {
+	std::thread::id tid = std::this_thread::get_id();
+	cout << "thread id=" << tid << "start." <<"thread_deepth =" <<threadDeepth<< endl;
+	if (low < high) {
+		// 找寻基准数据的正确索引
+		int mid = partition(nums, low, high);
+		//std::string numsStr = RandUtils::intArrToStr(nums, 10);
+		//RandUtils::print(nums, 10);
+		if (threadDeepth < maxNum) {
+			//最大线程数
+			vector<thread> vt;
+			vt.push_back(thread(&Sorting::parallel_quick_sort,this, nums, low, mid - 1, threadDeepth + 1, maxNum));
+			vt.push_back(thread(&Sorting::parallel_quick_sort,this, nums, mid + 1, high, threadDeepth + 1, maxNum));
+			for (int i = 0; i < vt.size(); i++) {
+				vt[i].join();
+			}
+		}
+		else {
+			quick_sort(nums, low, mid - 1);
+			quick_sort(nums, mid + 1, high);
+		}
+	}
+	cout << "thread id=" << tid << " end." << endl;
+}
+
+
+
 
 int Sorting::partition(int nums[], int low, int high) {
 	// 基准数据

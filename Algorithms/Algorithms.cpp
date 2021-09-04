@@ -9,12 +9,13 @@
 using namespace std;
 int main()
 {
-    int lentgh = 10;
+    int lentgh = 100000;
     Sorting sort;
-    int* nums = RandUtils::random(lentgh, 1, 100);
-    RandUtils::print(nums, lentgh);
-    sort.quickSort(nums, lentgh);
-    RandUtils::print(nums, lentgh);
+    int* nums = RandUtils::parallelRandom(lentgh, 1, 100,4);
+    //RandUtils::print(nums, lentgh);
+    cout << "start sorting" << endl;
+    sort.parallelQuickSort(nums, lentgh,4);
+    //RandUtils::print(nums, lentgh);
    cout << RandUtils::isSorted(nums, lentgh) << endl;
    cout << "Hello World!\n";
    string s1 = "789546321", s2 = "15462897444";

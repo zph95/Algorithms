@@ -1,21 +1,20 @@
 #include<iostream>
 #include<string.h>
 #include<time.h>
-#include<windows.h>
 #include<fstream>
 
-#define N 729//Êı¾İ¹æÄ£3^2
-#define MAX 16//×Ö·û´®×î´ó³¤¶È 
+#define N 729//æ•°æ®è§„æ¨¡3^2
+#define MAX 16//å­—ç¬¦ä¸²æœ€å¤§é•¿åº¦ 
 using namespace std;
 
 char alphabet[26];
 
 struct str {
-	int length;  //´æ·Å×Ö·û´®³¤¶È
-	int string[MAX+1];//×Ö·û´®Êı×é
-}A[N],B[N];  //AÎªËæ»úÉú³ÉµÄ×Ö·û´®Êı¾İ£¬BÎªÅÅĞòºóµÄ×Ö·û´®Êı¾İ
+	int length;  //å­˜æ”¾å­—ç¬¦ä¸²é•¿åº¦
+	int string[MAX+1];//å­—ç¬¦ä¸²æ•°ç»„
+}A[N],B[N];  //Aä¸ºéšæœºç”Ÿæˆçš„å­—ç¬¦ä¸²æ•°æ®ï¼ŒBä¸ºæ’åºåçš„å­—ç¬¦ä¸²æ•°æ®
 
-void output(str b[]) {  //Êä³ö×Ö·û´®Êı¾İ
+void output(str b[]) {  //è¾“å‡ºå­—ç¬¦ä¸²æ•°æ®
 	long i;
 	int j;
 	for (i = 0; i < N; i++) {
@@ -26,7 +25,7 @@ void output(str b[]) {  //Êä³ö×Ö·û´®Êı¾İ
 	}
 }
 
-void stringcopy(str a[], str b[]) {  //½«AµÄÊı¾İ¿½±´¸øB
+void stringcopy(str a[], str b[]) {  //å°†Açš„æ•°æ®æ‹·è´ç»™B
 	long i;
 	int j;
 	for (i = 0; i < N; i++) {
@@ -37,14 +36,14 @@ void stringcopy(str a[], str b[]) {  //½«AµÄÊı¾İ¿½±´¸øB
 	}
 }
 
-void copy(str &a, str &b) { //½«ÔªËØb¸³Öµ¸øa
+void copy(str &a, str &b) { //å°†å…ƒç´ bèµ‹å€¼ç»™a
 	a.length = b.length;
 	for (long i=0; i < a.length; i++) {
 		a.string[i] = b.string[i];
 	}
 }
 
-int compare(str a, str b) {  //±È½Ïstr a,b£»a<b ·µ»Ø1£¬·ñÔò·µ»Ø0£»
+int compare(str a, str b) {  //æ¯”è¾ƒstr a,bï¼›a<b è¿”å›1ï¼Œå¦åˆ™è¿”å›0ï¼›
 	if (a.length < b.length) return 1;
 	else if (a.length>b.length) return 0;
 	else for (int i = 0; i < a.length; i++) {
@@ -60,11 +59,14 @@ void sort3();
 void sort4();
 void sort5();
 
-int main() {
+
+int main(int argc, char *argv[])
+{
+    std::cout << "Hello world!" << std::endl;
 	
 	int  i;
 	long j;
-	for (i = 0; i < 26; i++) {  //³õÊ¼»¯alphabet
+	for (i = 0; i < 26; i++) {  //åˆå§‹åŒ–alphabet
 		alphabet[i] = toascii(i + 97);
 	}
 	/*	ofstream strout("input_strings.txt");
@@ -90,21 +92,15 @@ int main() {
 		}
 	}
 	in.close();
-	LARGE_INTEGER li;
-	long long f_time;
-	ofstream timeout("time.txt");
+	
 	for (i = 1; i <= 5; i++) {
 	
 		stringcopy(A, B);
 		switch (i) {
-		case 1: {  QueryPerformanceCounter(&li);		//¼ÆËãËã·¨Ğ§ÂÊÊ±¼ä
-			long long f_start = li.QuadPart;
+		case 1: { 
 			sort1();  //output(B); cout << endl;
-			QueryPerformanceCounter(&li);
-			long long f_end = li.QuadPart;
-			f_time = (f_end - f_start);
-			timeout << "Ö±½Ó²åÈëÅÅĞò time=" << f_time << endl;
-			ofstream out("Ö±½Ó²åÈëÅÅĞòresult.txt");
+			
+			ofstream out("ç›´æ¥æ’å…¥æ’åºresult.txt");
 			for (j = 0; j < N; j++) {
 				for (int k= 0; k < B[j].length; k++) {
 					out << alphabet[B[j].string[k]];
@@ -114,14 +110,10 @@ int main() {
 			out.close();
 			break;
 		}
-		case 2: {	QueryPerformanceCounter(&li);		//¼ÆËãËã·¨Ğ§ÂÊÊ±¼ä
-			long long f_start = li.QuadPart;
+		case 2: {	
 			sort2();  //output(B); cout << endl;
-			QueryPerformanceCounter(&li);
-			long long f_end = li.QuadPart;
-			f_time = (f_end - f_start);
-			timeout << "¹é²¢ÅÅĞò time=" << f_time << endl;
-			ofstream out("¹é²¢ÅÅĞòresult.txt");
+			
+			ofstream out("å½’å¹¶æ’åºresult.txt");
 			for (j = 0; j < N; j++) {
 				for (int k = 0; k < B[j].length; k++) {
 					out << alphabet[B[j].string[k]];
@@ -131,14 +123,10 @@ int main() {
 			out.close();
 			break;
 		}
-		case 3: {	QueryPerformanceCounter(&li);		//¼ÆËãËã·¨Ğ§ÂÊÊ±¼ä
-			long long f_start = li.QuadPart;
+		case 3: {	
 			sort3();  //output(B); cout << endl;
-			QueryPerformanceCounter(&li);
-			long long f_end = li.QuadPart;
-			f_time = (f_end - f_start);
-			timeout << "¿ìËÙÅÅĞò time=" << f_time << endl;
-			ofstream out("¿ìËÙÅÅĞòresult.txt");
+		
+			ofstream out("å¿«é€Ÿæ’åºresult.txt");
 			for (j = 0; j < N; j++) {
 				for (int k = 0; k < B[j].length; k++) {
 					out << alphabet[B[j].string[k]];
@@ -148,14 +136,10 @@ int main() {
 			out.close();
 			break;
 		}
-		case 4: {	QueryPerformanceCounter(&li);		//¼ÆËãËã·¨Ğ§ÂÊÊ±¼ä
-			long long f_start = li.QuadPart;
+		case 4: {
 			sort4();  //output(B); cout << endl;
-			QueryPerformanceCounter(&li);
-			long long f_end = li.QuadPart;
-			f_time = (f_end - f_start);
-			timeout << "¶ÑÅÅĞò time=" << f_time << endl;
-			ofstream out("¶ÑÅÅĞòresult.txt");
+			
+			ofstream out("å †æ’åºresult.txt");
 			for (j = 0; j < N; j++) {
 				for (int k = 0; k < B[j].length; k++) {
 					out << alphabet[B[j].string[k]];
@@ -165,14 +149,10 @@ int main() {
 			out.close();
 			break;
 		}
-		case 5: {	QueryPerformanceCounter(&li);		//¼ÆËãËã·¨Ğ§ÂÊÊ±¼ä
-			long long f_start = li.QuadPart;
+		case 5: {	
 			sort5();  //output(B); cout << endl;
-			QueryPerformanceCounter(&li);
-			long long f_end = li.QuadPart;
-			f_time = (f_end - f_start);
-			timeout << "SHELLÅÅĞò time=" << f_time << endl;
-			ofstream out("SHELLÅÅĞòresult.txt");
+		
+			ofstream out("SHELLæ’åºresult.txt");
 			for (j = 0; j < N; j++) {
 				for (int k = 0; k < B[j].length; k++) {
 					out << alphabet[B[j].string[k]];
@@ -186,11 +166,10 @@ int main() {
 		}
 		
 	}
-	timeout.close();
 	return 0;
 }
 
-void  sort1() { //Ö±½Ó²åÈëÅÅĞò
+void  sort1() { //ç›´æ¥æ’å…¥æ’åº
 	long i,j;
 	str temp;
 	temp.length = 1;
@@ -237,7 +216,7 @@ void mergesort( long p, long r) {
 	}
 }
 
-void  sort2() { //¹é²¢ÅÅĞò
+void  sort2() { //å½’å¹¶æ’åº
 	mergesort(0, N - 1);
 }
 
@@ -268,7 +247,7 @@ void quicksort( long p, long r) {
 }
 
 
-void  sort3() {//¿ìËÙÅÅĞò
+void  sort3() {//å¿«é€Ÿæ’åº
 	quicksort( 0, N - 1);
 }
 
@@ -311,10 +290,10 @@ void MAX_HEAPIFY( long i)
 	}
 }
 
-void  sort4() { //¶ÑÅÅĞò
+void  sort4() { //å †æ’åº
 	long i;
 	str temp;
-	for (i = N / 2; i >= 0; i--)  //½¨¶Ñ
+	for (i = N / 2; i >= 0; i--)  //å»ºå †
 	{
 		MAX_HEAPIFY(i);
 	}
@@ -329,18 +308,18 @@ void  sort4() { //¶ÑÅÅĞò
 
 }
 
-void  sort5() { //Ï£¶ûÅÅĞò
+void  sort5() { //å¸Œå°”æ’åº
 	long i, j, gap;
 	int k;
 	for (k=5; k > 0; k--) 
-		switch (k) { //Ï£¶ûÔöÁ¿
+		switch (k) { //å¸Œå°”å¢é‡
 		case 1: {gap = 1; break; }
 		case 2: {gap = 3; break; }
 		case 3: {gap = 7; break; }
 		case 4: {gap = 15; break; }
 		case 5: {gap = 21; break; }
 		}
-		for (i = 0; i < gap; i++)        //Ö±½Ó²åÈëÅÅĞò  
+		for (i = 0; i < gap; i++)        //ç›´æ¥æ’å…¥æ’åº  
 		{	
 			for (j = i + gap; j < N;j += gap)
 				if (compare(B[j] , B[j - gap]))

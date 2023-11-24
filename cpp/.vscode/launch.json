@@ -34,8 +34,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/root/github/Algorithms/cpp",
-      "program": "/root/github/Algorithms/cpp/build/Debug/outDebug",
+      "cwd": "/root/github/Algorithms/cpp/include",
+      "program": "/root/github/Algorithms/cpp/include/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
